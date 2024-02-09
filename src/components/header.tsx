@@ -3,12 +3,15 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import { Feather } from '@expo/vector-icons'
 import colors from "tailwindcss/colors";
 
+import { useCartStore } from "@/stores/cart-store";
+
 type HeaderProps = {
   title: string;
-  cartQuantityItems?: number;
 }
 
-export function Header({ title, cartQuantityItems = 0 }: HeaderProps) {
+export function Header({ title }: HeaderProps) {
+  const cartStore = useCartStore()
+  const cartQuantityItems = cartStore.products.reduce((acc, product) => acc + product.quantity, 0)
 
   return (
     <View className="flex-row items-center border-b border-slate-700 pb-5 mx-5">
@@ -18,7 +21,7 @@ export function Header({ title, cartQuantityItems = 0 }: HeaderProps) {
           {title}
         </Text>
       </View>
-      {cartQuantityItems > 1 && (
+      {cartQuantityItems >= 1 && (
         <TouchableOpacity className="relative" activeOpacity={0.7}>
           <View className="bg-lime-300 w-4 h-4 rounded-full items-center justify-center top-2 z-10 -right-3.5">
             <Text className="text-slate-900 font-bold text-xs">
