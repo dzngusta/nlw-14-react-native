@@ -5,7 +5,7 @@ import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 
 import { PRODUCTS } from "@/utils/data/products";
-import { formatCurrent } from "@/utils/functions/format-currency";
+import { formatCurrency } from "@/utils/functions/format-currency";
 
 import { Button } from "@/components/button";
 import { LinkButton } from "@/components/link-button";
@@ -32,7 +32,7 @@ export default function Product() {
       />
       <View className="flex-1 p-5 mt-8">
         <Text className="text-lime-400 text-2xl font-heading my-2">
-          {formatCurrent(product.price)}
+          {formatCurrency(product.price)}
         </Text>
         <Text className="text-slate-400 font-body text-base leading-6 mb-6">
           {product.description}
